@@ -85,6 +85,15 @@ import re
 import sys
 
 # Complete the minimumSwaps function below.
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the minimumSwaps function below.
 def minimumSwaps(arr):
     swaps = 0
     '''maximum = max(arr)
@@ -101,18 +110,36 @@ def minimumSwaps(arr):
             swaps += minimumSwaps(arr[:maximum - 1])
         return swaps
     else:
-        return 0'''
+        return 0
 
     for pos, value in enumerate(arr):
         if (value-1) != pos:
-            temp = min(arr[pos:])
-            arr[arr.index(min(arr[pos:]))] = value
+            temp = arr[value-1]
+            arr[pos] = temp
+            arr[value-1] = value
+            print(arr)
+            temp = pos+1
+            arr[arr.index(pos+1)] = value
             arr[pos] = temp
             swaps += 1
         else:
             pass
     
+    return swaps'''
+
+    i = 0
+    while i < len(arr):
+        value = arr[i]
+        if (i+1) != value:
+            temp = arr[value-1]
+            arr[value-1] = value
+            arr[i] = temp
+            swaps += 1
+        else:
+            i += 1
+
     return swaps
+
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
@@ -126,3 +153,4 @@ if __name__ == '__main__':
     fptr.write(str(res) + '\n')
 
     fptr.close()
+
